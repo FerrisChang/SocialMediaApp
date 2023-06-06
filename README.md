@@ -1,5 +1,7 @@
 # socialMediaApp
 Will simulate a social media application
 
-backend: 
-Sanity
+backend: Sanity
+
+
+frontend: React
