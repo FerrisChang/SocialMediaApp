@@ -10,8 +10,10 @@ import { client } from "../client";
 const Login = () => {
     const navigate = useNavigate();
     const createOgGetUser = async (response) => {
+        
         const decoded = jwt_decode(response.credential);
 
+        localStorage.setItem('user', JSON.stringify(decoded));
         const sub = decoded.sub;
         const name = decoded.name;
         const picture = decoded.picture;
