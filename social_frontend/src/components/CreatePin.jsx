@@ -22,8 +22,6 @@ const CreatePin = ({ user }) => {
   const uploadImage = (e) => {
     const {type, name} = e.target.files[0];
 
-    console.log(name)
-    console.log(type)
     if(type === 'image/png' || type === 'image/svg'|| type === 'image/jpeg'|| type === 'image/gif'|| type === 'image/tiff') {
       setWrongImageType(false);
       setLoading(true);
@@ -32,7 +30,6 @@ const CreatePin = ({ user }) => {
       .then((document) => {
         setImageAsset(document);
         setLoading(false);
-        console.log(document)
       })
       .catch((error) => {
         console.log('Image upload error', error);
@@ -69,12 +66,7 @@ const CreatePin = ({ user }) => {
     } else {
       setFields(true);
 
-      setTimeout(
-        () => {
-          setFields(false);
-        },
-        2000,
-      );
+      setTimeout(() => setFields(false), 2000);
     }
   };
   return (
@@ -124,7 +116,6 @@ const CreatePin = ({ user }) => {
             )}
           </div>
         </div>
-
           <div className="flex flex-1 flex-col gap-6 lg:pl-5 mt-5 w-full">
             <input
               type="text"
@@ -157,33 +148,33 @@ const CreatePin = ({ user }) => {
               placeholder="Add a destination link"
               className="outline-none text-base sm:text-lg border-b-2 border-gray-200 p-2"
             />
-          </div>
-          <div className="flex flex-col">
+            <div className="flex flex-col">
               <div>
                 <p className="mb-2 font-semibold text:lg sm:text-xl">Choose Pin Category</p>
                 <select
                   onChange={(e) => setCategory(e.target.value)}
                   className="outline-none w-4/5 text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
                 >
-                  <option value="other" className="bg-white w-full">Select Category</option>
-                  {categories.map((category) =>(
-                    <option className="text-base border-0 outline-none capitalize bg-white text-black" value={category.name}>
-                      {category.name}
-                    </option>
-                  ))}
+                <option value="other" className="bg-white w-full">Select Category</option>
+                {categories.map((category) =>(
+                  <option className="text-base border-0 outline-none capitalize bg-white text-black" value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
                 </select>
               </div>
               <div className="flex justify-end items-end mt-5">
-                    <button
-                      type="button"
-                      onClick={savePin}
-                      className="bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none">
-                        Save Pin
-                      </button>
+                <button
+                  type="button"
+                  onClick={savePin}
+                  className="bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none">
+                    Save Pin
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   )
 }
 

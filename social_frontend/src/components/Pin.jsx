@@ -10,36 +10,39 @@ import { fetchUser } from '../utils/fetchUser';
 
 const Pin = ({ pin:{postedBy, image, _id, destination, save} }) => {
   const [postHovered, setPostHovered] = useState(false);
+  const [savingPost, setSavingPost] = useState(false);
   const navigate = useNavigate();
   const user = fetchUser();
 
   const alreadySaved = !!(save?.filter((item) => item.postedBy?._id === user.sub))?.length;
   
   const savePin = (id) => {
-    if(!alreadySaved) {
+    if (!alreadySaved) {
+      setSavingPost(true);
       client
-      .patch(id)
-      .setIfMissing({save: []})
-      .insert('after', 'save[-1]', [{
-        _key: uuidv4(),
-        userId: user.sub,
-        postedBy: {
-          _type: 'postedBy',
-          _ref: user.sub
-        }
-      }])
-      .commit()
-      .then(() => {
-        window.location.reload();
-      })
+        .patch(id)
+        .setIfMissing({ save: [] })
+        .insert('after', 'save[-1]', [{
+          _key: uuidv4(),
+          userId: user.sub,
+          postedBy: {
+            _type: 'postedBy',
+            _ref: user.sub,
+          },
+        }])
+        .commit()
+        .then(() => {
+          window.location.reload();
+        });
     }
-  }
+  };
 
   const deletePin = (id) => {
     client
       .delete(id)
       .then(() => {
         window.location.reload();
+        setSavingPost(false)
     })
   }
 
@@ -83,7 +86,7 @@ const Pin = ({ pin:{postedBy, image, _id, destination, save} }) => {
                     savePin(_id);
                   }}
                   type='button' className='bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outlined-none'>
-                  Save
+                  {savingPost ? "Saving" : "Save" }
                 </button>
               )}
             </div>
@@ -96,7 +99,7 @@ const Pin = ({ pin:{postedBy, image, _id, destination, save} }) => {
                 className="bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md"
                 rel="noreferrer">
                     <BsFillArrowUpRightCircleFill />
-                    {destination.length > 20 ? destination.slice(8, 20) : destination.slice(8) }
+                    {destination.length > 15 ? `${destination.slice(0, 15)}...` : destination}
                   </a>
               )}
 
