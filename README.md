@@ -1,7 +1,7 @@
 # socialMediaApp
 Full stack social media application that allows you to share and post photos. This application is a clone of Pinterest including color schemes and styling.
 
-![Front Page](../socialMediaApp/social_frontend/public/frontpage.png)
+![Front Page](forReadMe/frontpage.png)
 
 ## Used to build this app
 Javascript, React, Tailwind, Sanity
@@ -16,4 +16,4 @@ TailWind - CSS framework used for styling. Inline styling adding using tailwind 
 
 Google used to verify login allowing the user to have seemless connection to other social media and applicaitons. New `GoogleOAuthProvider` tag wrapping GoogleLogin need after depreciation of older verification standards imported from `@react-oauth/google`
 
-![googleAPI](../socialMediaApp/social_frontend/public/googleApi.png)
+![googleAPI](forReadMe/googleApi.png)
