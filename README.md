@@ -1,5 +1,5 @@
 # socialMediaApp
-Will simulate a social media application
+Full stack social media application that allows you to share and post photos. This application is a clone of Pinterest including color schemes and styling.
 ## Used to build this app
 Javascript, React, Tailwind, Sanity
 
